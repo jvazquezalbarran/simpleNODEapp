@@ -1,0 +1,16 @@
+﻿# Node.js
+node_modules/
+
+# Logs
+*.log
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.tmp
+*.cache
+*.db
+
+# Otros temporales
+.DS_Store

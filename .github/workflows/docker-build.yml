@@ -1,0 +1,29 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Login Azure Container Registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: arcalumnos.azurecr.io
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/docker-ci-demo:latest .
+
+    - name: Push image
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/docker-ci-demo:latest
